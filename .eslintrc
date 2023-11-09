@@ -15,6 +15,7 @@
   "rules": {
     "prettier/prettier": "error",
     "indent": ["error", 2,   {
+    // To avoid conflict with switch statements 
     "SwitchCase": 1,
     "ignoredNodes": ["ConditionalExpression"]
   }],
