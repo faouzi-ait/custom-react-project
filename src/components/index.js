@@ -1,3 +1,3 @@
-// import Component from './';
+import Button from './button';
 
-// export { Component };
+export { Button };
