@@ -23,6 +23,7 @@ import PropTypes from 'prop-types';
  * @returns {ReactElement} React component representing a button.
  */
 const Button = ({ variant, onClick, children, ariaLabel, ariaHasPopup }) => {
+  // COMMENT HERE
   const getButtonClassName = () => {
     switch (variant) {
       case 'primary':
