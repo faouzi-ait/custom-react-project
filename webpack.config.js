@@ -14,7 +14,7 @@ module.exports = async (env, argv) => {
     mode: isProduction ? 'production' : 'development',
     entry: './src/index.js',
     output: {
-      path: path.resolve(__dirname, 'dist'),
+      path: path.resolve(__dirname, 'build'),
       filename: isProduction ? '[name].[contenthash].js' : '[name].js',
       clean: true,
     },
