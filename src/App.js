@@ -7,7 +7,7 @@ const App = () => {
   // TESTING CIRCLECI
   return (
     <main className={styles.app}>
-      <h1>This is a Custom React App</h1>
+      <h1>This is a Custom React App 2</h1>
     </main>
   );
 };
