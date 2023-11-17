@@ -18,12 +18,12 @@ jobs:
       #     key: app-build-cache-{{ .Branch }}
       #     paths:
       #       - ./build
-      # - run:
-      #     name: Deploy to Netlify
-      #     command: deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --prod --dir=dist
       - run:
-          name: Deploy
-          command: curl -X POST -d {} ${hook}
+          name: Deploy to Netlify
+          command: deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --prod --dir=build
+      # - run:
+      #     name: Deploy
+      #     command: curl -X POST -d {} ${hook}
   workflows:
     version: 2
     build-deploy:
