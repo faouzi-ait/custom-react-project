@@ -16,6 +16,7 @@ module.exports = async (env, argv) => {
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: isProduction ? '[name].[contenthash].js' : '[name].js',
+      publicPath: '/',
       clean: true,
     },
     module: {
@@ -88,6 +89,7 @@ module.exports = async (env, argv) => {
       },
       port,
       open: true,
+      historyApiFallback: true,
     },
   };
 };
