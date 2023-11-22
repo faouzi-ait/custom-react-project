@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const Dotenv = require('dotenv-webpack'); // Add this line
 const portfinder = require('portfinder');
 
 module.exports = async (env, argv) => {
@@ -21,35 +22,7 @@ module.exports = async (env, argv) => {
     },
     module: {
       rules: [
-        {
-          test: /\.(js|jsx)$/,
-          exclude: /node_modules/,
-          use: {
-            loader: 'babel-loader',
-            options: {
-              presets: ['@babel/preset-env', '@babel/preset-react'],
-            },
-          },
-        },
-        {
-          test: /\.scss$/,
-          use: [
-            isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
-            'css-loader',
-            'sass-loader',
-          ],
-        },
-        {
-          test: /\.css$/,
-          use: [
-            isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
-            'css-loader',
-          ],
-        },
-        {
-          test: /\.(png|jpg|jpeg|svg)$/,
-          use: 'file-loader',
-        },
+        // ... (your existing rules)
       ],
     },
     plugins: [
@@ -69,6 +42,15 @@ module.exports = async (env, argv) => {
         minRatio: 0.8,
         deleteOriginalAssets: false,
       }),
+      new TerserWebpackPlugin({
+        terserOptions: {
+          format: {
+            comments: false,
+          },
+        },
+        extractComments: false,
+      }),
+      new Dotenv(), // Add this line
     ],
     optimization: {
       minimizer: [
