@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const Dotenv = require('dotenv-webpack'); // Add this line
+const Dotenv = require('dotenv-webpack');
 const portfinder = require('portfinder');
 
 module.exports = async (env, argv) => {
@@ -22,7 +22,41 @@ module.exports = async (env, argv) => {
     },
     module: {
       rules: [
-        // ... (your existing rules)
+        {
+          test: /\.(js|jsx)$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env', '@babel/preset-react'],
+            },
+          },
+        },
+        {
+          test: /\.scss$/,
+          use: [
+            isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+            'css-loader',
+            'sass-loader',
+          ],
+        },
+        {
+          test: /\.css$/,
+          use: [
+            isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+            'css-loader',
+          ],
+        },
+        {
+          test: /\.(png|jpg|jpeg|svg)$/,
+          use: {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[hash].[ext]',
+              outputPath: 'images', // Adjust the output path as needed
+            },
+          },
+        },
       ],
     },
     plugins: [
@@ -50,12 +84,11 @@ module.exports = async (env, argv) => {
         },
         extractComments: false,
       }),
-      new Dotenv(), // Add this line
+      new Dotenv(),
     ],
     optimization: {
       minimizer: [
-        // Enables tree shaking
-        new TerserWebpackPlugin({
+        new TerserWebpackPlugin({ // Enables tree shaking
           terserOptions: {
             format: {
               comments: false,
