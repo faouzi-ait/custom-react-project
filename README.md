@@ -3,7 +3,7 @@ Starter Boilerplate custom react project configuration.
 A boilerplate used to create a new project built with React, JavaScript and CSS/SASS
 
 #### Description:
-The idea behind this repo is to have a fully controlled, custom built and ready to use React project that is not using `npx create-react-app` and that has all the main modules and features configured suck as:
+Custom built and ready to use React project with the following confiuration:
 
 * JavaScript ES6+
 * CSS3 & SASS
